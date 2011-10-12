@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>KISSY util - yourUtil</title> 
+	<link rel="shortcut icon" href="../../kissy-dpl/base/assets/favicon.ico"/> 
+	<link rel="stylesheet" href="../../kissy-dpl/base/assets/reset.css"/> 
+	<link rel="stylesheet" href="../../kissy-dpl/base/assets/kissy-docs.css"/> 	
+	<script src="http://docs.kissyui.com/kissy/build/kissy-min.js" charset="utf-8"></script>
+	<script src="../../kissy-dpl/base/assets/kissy-docs.js"></script> 
+	<script src="your-util.js"></script> 
+</head>
+<body>
+    <div id="header"> 
+		<h1 class="logo"><a alt="KISSY" href="http://kissyui.com/"><img src="../../kissy-dpl/base/assets/logo.png"/></a></h1> 
+		<div class="sub-title">Util</div>
+		<ul class="navigation"> 
+			<li><a href="http://blog.kissyui.com/">博客</a></li> 
+			<li><a href="http://github.com/kissyteam">源码</a></li> 		
+		</ul>
+		
+	</div> 
+    <div id="content">
+		<div class="s-crumbs">
+			<span>当前位置：</span>
+			<a href="http://kissyui.com/">KISSY</a>
+			<a href="../index.html">Util</a>
+			<span>yourUtil</span>
+		</div>
+			<pre class="s-section">				
+作者：yiminghe@gmail.com
+功能：play sound in wav format
+源码：<a href="checkcode.js">checkcode</a></pre>
+			
+			<h3 class="s-title">Demo - 功能点</h3>			
+			<div class="s-section">
+				<div class="s-demo">
+					<div>
+                       
+                        <a id='t'
+                           href="javascript:void('play')"
+                           tabindex='0'
+                           data-vsrc="http://voicecheckcode.taobao.com/vcc/checkcode?sessionID=c21bf5b22f4a7d6df62d89e6bb4e0def&r=1318411996074">点击播放语音</a>
+                    </div>
+                    <script src="checkcode.js"></script>
+                    <script>
+                        KISSY.ready(function(S) {
+                            S.all("#t").on("click", function() {
+                                S.CheckCodePlayer(S.all(this).attr("data-vsrc"));
+                            });
+                        });
+                    </script>
+				</div>
+				<a class="s-view-code" href="#">显示源码</a><!--点击该链接自动帮你显示s=demo里的内容，如不需要，去除链接即可-->
+			</div>
+			
+			<h3 class="s-title">API</h3>			
+			<div class="s-section">
+				<h4 class="s-api-title">方法</h4>
+				<div class="s-api-method">KISSY.CheckCodePlayer ( url )</div>
+				<h4 class="s-api-title">参数</h4>
+				<div class="s-api-params">
+					<ul class="s-list">
+						<li>{String} [ <em>param</em> = 'url' ] wav 格式的验证码语音地址</li>
+					</ul>
+				</div>
+				<h4 class="s-api-title">返回</h4>
+				<div class="s-api-return">null</div>
+			</div>
+			
+			
+    </div>
+    <div id="footer">
+        &copy; Copyright 2010~2011, KISSY Team.
+    </div>
+</body>
+</html>
