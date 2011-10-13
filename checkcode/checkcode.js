@@ -6,23 +6,41 @@
  * @author yiminghe@gmail.com
  */
 (function() {
+
     var S = KISSY,
-        holder,
+        doc = document,
+        DOM = S.DOM,
+        player,
         // ie9 can not play wav !
-        _buildHtml = ("Audio" in window && (new Audio()).canPlayType('audio/x-wav;')) ?
-            function(src) {
-                return '<audio preload="auto" autoplay>' +
-                    '<source src="' + src + '" type="audio/x-wav">' +
-                    '</audio>'; //chrome/fx/opera/safari
-            } :
-            function(src) {
-                return '<embed src="' + src + '" autostart="true" hidden="true"></embed>'; //ie
-            };
+        playerHtml = ("Audio" in window && (new Audio()).canPlayType('audio/x-wav;')) ?
+            // chrome/fx/opera/safari
+            '<audio preload="auto" autoplay="autoplay"></audio>' :
+            // ie
+            // can only be put under body ??
+            '<bgsound></bgsound>';
+
+    // ie6 need this ??
+    function refreshPlayer() {
+        DOM.prepend(player, doc.body || doc.documentElement);
+    }
+
+    function _player() {
+        refreshPlayer();
+        return player;
+    }
+
+    function getPlayer() {
+        if (player) {
+            getPlayer = _player;
+            return getPlayer();
+        }
+        player = DOM.create(playerHtml);
+        refreshPlayer();
+        return player;
+    }
 
     S.CheckCodePlayer = function(url) {
-        holder = holder || new S.Node("<div style='position: absolute;left:-9999px;top:-9999px;'>" +
-            "</div>").appendTo(document.body);
-        holder.html(_buildHtml(url))
+        getPlayer().src = url;
     };
 
 })();
