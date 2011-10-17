@@ -22,7 +22,7 @@
             // ie
             // can only be put under body ??
             (S.UA.ie?'<bgsound></bgsound>':
-            // old firefox , use wnidows media player in windows and quicktime in others
+            // old firefox , use windows media player in windows and quicktime player in others
             '<embed '+(isWin()?'type="application/x-mplayer2"':'')+' autostart="true" hidden="true"></embed>');
 
     // ie6 need this ??
