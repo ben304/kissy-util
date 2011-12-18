@@ -50,12 +50,16 @@ KISSY.add('util/placeholder', function(S) {
 
             self._decorate = function() {
                 //创建一个label
-                var triggerLabel = self.triggerLabel = D.create(S.substitute('<label>{tip}</label>', {
+                var triggerLabel = self.triggerLabel = D.create(S.substitute('<label style="display: none">{tip}</label>', {
                     tip:placeHolderTip
                 }));
 
-                if(target.id) {
+                if(target.attr('id')) {
                     D.attr(triggerLabel, 'for', target.attr('id'));
+                } else {
+                    S.one(triggerLabel).on('click', function() {
+                        target.get(0).focus();
+                    });
                 }
 
                 //create parent
@@ -67,6 +71,12 @@ KISSY.add('util/placeholder', function(S) {
                 //insertbefore target
                 D.insertBefore(triggerLabel, target);
 
+                //judge value && init form reset
+                S.later(function() {
+                    if(!target.val()) {
+                        D.show(triggerLabel);
+                    }
+                }, 100);
             };
 
             target.on('focus', function(ev) {
