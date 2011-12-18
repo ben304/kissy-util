@@ -58,7 +58,7 @@ KISSY.add('util/placeholder', function(S) {
                     D.attr(triggerLabel, 'for', target.attr('id'));
                 } else {
                     S.one(triggerLabel).on('click', function() {
-                        target.get(0).focus();
+                        target[0].focus();
                     });
                 }
 
