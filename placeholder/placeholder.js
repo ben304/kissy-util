@@ -53,7 +53,6 @@ KISSY.add('util/placeholder', function(S) {
             if(!placeHolderTip) return;
 
             function _decorate() {
-                debugger
                 //创建一个label
                 var str=S.substitute(TIP_TMPL, {
                     tip:placeHolderTip
