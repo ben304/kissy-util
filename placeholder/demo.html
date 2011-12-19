@@ -6,7 +6,7 @@
 <link rel="shortcut icon" href="../../kissy-dpl/base/assets/favicon.ico"/>
 <link rel="stylesheet" href="../../kissy-dpl/base/assets/reset.css"/>
 <link rel="stylesheet" href="../../kissy-dpl/base/assets/kissy-docs.css"/>
-<script src="../../kissy-dpl/base/assets/kissy.js"></script>
+<script src="http://a.tbcdn.cn/s/kissy/1.2.0/kissy.js"></script>
 <script src="../../kissy-dpl/base/assets/kissy-docs.js"></script>
 <script src="placeholder.js"></script>
 </head>
@@ -131,16 +131,14 @@
                 </li>
                 <li class="clearfix">
                     <label class="field">留言：<span style="visibility:hidden;">*</span></label>
-                    <textarea name="guestbook" placeholder="选填，可以告诉卖家您的特殊要求" class="J_Placeholder"></textarea>
+                    <textarea name="guestbook" placeholder="选填，可以告诉卖家您的特殊要求，可以告诉卖家您的特殊要求" class="J_Placeholder"></textarea>
                 </li>
             </ul>
 
         <script>
-            KISSY.use('util/placeholder', function(S) {
+            KISSY.use('util/placeholder', function(S,placeholder) {
                 S.all('#order-form .J_Placeholder').each(function(el) {
-                    S.Util.placeholder(el, {
-                        wrap:true
-                    });
+                   placeholder(el);
                 });
             });
         </script>
@@ -151,12 +149,11 @@
 <h3 class="s-title">API</h3>
 <div class="s-section">
     <h4 class="s-api-title">方法</h4>
-    <div class="s-api-method">KISSY.util.placeholder ( el, cfg )</div>
+    <div class="s-api-method">KISSY.util.placeholder ( el )</div>
     <h4 class="s-api-title">参数</h4>
     <div class="s-api-params">
         <ul class="s-list">
             <li>{String | HtmlElement} 选择器或者单个HtmlElement对象</li>
-            <li>{Object} 参数对象 { wrap:{Boolean} 表示是否自动包括一个父元素，默认true }
             </li>
         </ul>
     </div>

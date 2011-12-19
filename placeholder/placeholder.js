@@ -5,7 +5,11 @@
  */
 KISSY.add('util/placeholder', function(S) {
 
-    var D = S.DOM, E = S.Event;
+    var $=S.all,
+        WRAP_TMPL='<div class="placeholder" style="position: relative;display:'+(S.UA.ie>7?'inline-block':'inline')+';zoom:1;"></div>',
+        TIP_TMPL='<label style="display: none;position:absolute;left:0;top:0;">{tip}</label>',
+        isSupport = "placeholder" in document.createElement("input");
+        
     /**
      * config{
      *  el：{HtmlElement}目标表单元素
@@ -16,13 +20,12 @@ KISSY.add('util/placeholder', function(S) {
      * 1、html5的placeholder属性
      * 2、其他浏览器的支持
      */
-    function placeholder(el, cfg) {
-        var isSupport = "placeholder" in document.createElement("input"),
-            self = this;
+    function placeholder(el, cfg) {  
         //支持html5的placeHolder属性
         if(isSupport) return;
 
-        var defaultCfg = {
+        var self=this,
+        defaultCfg = {
             wrap:true
         };
 
@@ -40,56 +43,58 @@ KISSY.add('util/placeholder', function(S) {
 
             if(!target) {
                 S.log('[placeholder] has no target to decorate');
+                return;
             }
 
-            target = S.one(target);
+            target = $(target);
 
             var placeHolderTip = target.attr('placeholder');
 
             if(!placeHolderTip) return;
 
-            self._decorate = function() {
+            function _decorate() {
+                debugger
                 //创建一个label
-                var triggerLabel = self.triggerLabel = D.create(S.substitute('<label style="display: none">{tip}</label>', {
+                var str=S.substitute(TIP_TMPL, {
                     tip:placeHolderTip
-                }));
-
+                });
+                var triggerLabel = self.triggerLabel = $(str);
+                triggerLabel.css("width",target.css("width"));
                 if(target.attr('id')) {
-                    D.attr(triggerLabel, 'for', target.attr('id'));
+                    triggerLabel.attr('for', target.attr('id'));
                 } else {
-                    S.one(triggerLabel).on('click', function() {
+                    triggerLabel.on('click', function() {
                         target[0].focus();
                     });
                 }
 
-                //create parent
-                if(cfg.wrap) {
-                    var targetBox = D.create('<div class="placeholder" style="position: relative"></div>');
-                    S.one(targetBox).appendTo(target.parent()).append(target);
-                }
+                //create parent               
+                var targetBox = $(WRAP_TMPL);
+                targetBox.appendTo(target.parent())
+                .append(target);
 
                 //insertbefore target
-                D.insertBefore(triggerLabel, target);
+               triggerLabel.insertBefore(target);
 
                 //judge value && init form reset
                 S.later(function() {
                     if(!target.val()) {
-                        D.show(triggerLabel);
+                        triggerLabel.show();
                     }
                 }, 100);
             };
 
             target.on('focus', function(ev) {
-                D.hide(self.triggerLabel);
+                self.triggerLabel.hide();
             });
 
             target.on('blur', function(ev) {
                 if(!target.val()) {
-                    D.show(self.triggerLabel);
+                    self.triggerLabel.show();
                 }
             });
 
-            self._decorate();
+            _decorate();
 
         },
         /**
@@ -97,13 +102,9 @@ KISSY.add('util/placeholder', function(S) {
          * @param newTip
          */
         text:function(newTip) {
-            D.text(this.triggerLabel, newTip);
+            this.triggerLabel.text(newTip);
         }
     });
-
-    //1.1.6 support
-    S.namespace("Util");
-    S.Util.placeholder = placeholder;
 
     return placeholder;
 });
