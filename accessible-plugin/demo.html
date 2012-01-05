@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="../../kissy-dpl/base/assets/kissy-docs.css"/>
 <script src="http://a.tbcdn.cn/s/kissy/1.2.0/kissy.js"></script>
 <script src="../../kissy-dpl/base/assets/kissy-docs.js"></script>
-<script src="accessible-flash.js"></script>
+<script src="accessible-plugin.js"></script>
 </head>
 <body>
 <div id="header">
@@ -25,13 +25,13 @@
         <span>当前位置：</span>
         <a href="http://kissyui.com/">KISSY</a>
         <a href="../index.html">Util</a>
-        <span>accessible-flash</span>
+        <span>accessible-plugin</span>
     </div>
         <pre class="s-section">
 作者：yiminghe@gmail.com
-功能：accessible-flash
-描述：flash 输入控件具备键盘可访问性（chrome除外）
-源码：<a href="accessible-flash.js">accessible-flash.js</a></pre>
+功能：accessible-plugin
+描述：输入控件具备键盘可访问性（chrome除外）
+源码：<a href="accessible-plugin.js">accessible-plugin.js</a></pre>
 
     <h3 class="s-title">使用实例</h3>
     <div class="s-section">
@@ -40,7 +40,7 @@
             <br/>
             <div class="field ph-hide">
                 <label for="TPL_username_1">账户名</label>
-                <input type="text"  maxlength="32" value="yiming_water" class="login-text J_UserName J_Focused" id="TPL_username_1" name="TPL_username">
+                <input type="text" tabindex='1' maxlength="32" value="yiming_water" class="login-text J_UserName J_Focused" id="TPL_username_1" name="TPL_username">
             </div>
             <div class="field">
                 <label id="password-label">密　码</label>
@@ -60,11 +60,11 @@
               </div>  
               <div class="field">
                 <span>
-                    验证码  <input />
+                    验证码  <input tabindex='3'/>
                 </span>
                </div>  
                <script>
-                KISSY.util.AccessibleFlash("#Password_Edit_IE");
+                KISSY.util.AccessiblePlugin("#Password_Edit_IE",2);
              </script>
             </div>
             

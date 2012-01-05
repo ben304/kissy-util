@@ -63,7 +63,7 @@
             return e[0].nodeType==1&&e[0].offsetHeight && e[0].offsetWidth &&e.attr("tabindex")>=0;
         }
         S.namespace("util");
-        S.util.AccessibleFlash=function(ob,tabindex){
+        S.util.AccessiblePlugin=function(ob,tabindex){
             ob=S.one(ob);
             var flash=S.UA.ie?ob:ob.one("embed");        
             flash.attr("tabindex",tabindex||0);
