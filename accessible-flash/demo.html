@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>KISSY util - placeholder</title>
+<link rel="shortcut icon" href="../../kissy-dpl/base/assets/favicon.ico"/>
+<link rel="stylesheet" href="../../kissy-dpl/base/assets/reset.css"/>
+<link rel="stylesheet" href="../../kissy-dpl/base/assets/kissy-docs.css"/>
+<script src="http://a.tbcdn.cn/s/kissy/1.2.0/kissy.js"></script>
+<script src="../../kissy-dpl/base/assets/kissy-docs.js"></script>
+<script src="accessible-flash.js"></script>
+</head>
+<body>
+<div id="header">
+    <h1 class="logo"><a alt="KISSY" href="http://kissyui.com/"><img src="../../kissy-dpl/base/assets/logo.png"/></a></h1>
+    <div class="sub-title">Util</div>
+    <ul class="navigation">
+        <li><a href="http://blog.kissyui.com/">博客</a></li>
+        <li><a href="http://github.com/kissyteam">源码</a></li>
+    </ul>
+
+</div>
+<div id="content">
+    <div class="s-crumbs">
+        <span>当前位置：</span>
+        <a href="http://kissyui.com/">KISSY</a>
+        <a href="../index.html">Util</a>
+        <span>accessible-flash</span>
+    </div>
+        <pre class="s-section">
+作者：yiminghe@gmail.com
+功能：accessible-flash
+描述：flash 输入控件具备键盘可访问性（chrome除外）
+源码：<a href="accessible-flash.js">accessible-flash.js</a></pre>
+
+    <h3 class="s-title">使用实例</h3>
+    <div class="s-section">
+        <div class="s-demo">            
+      
+            <div class="field ph-hide">
+                <label for="TPL_username_1">账户名</label>
+                <input type="text"  maxlength="32" value="yiming_water" class="login-text J_UserName J_Focused" id="TPL_username_1" name="TPL_username">
+            </div>
+            <div class="field">
+                <label id="password-label">密　码</label>
+                <span id="J_StandardPwd" style="display: none;">
+                    <input type="password"  maxlength="10000" class="login-text" name="TPL_password" aria-labelledby="password-label">
+                </span>
+              
+                <span class="password-edit" id="J_PasswordEdit">
+                    
+                    <object id="Password_Edit_IE"  width="190" height="26" classid="clsid:488A4255-3236-44B3-8F27-FA1AECAA8844" codebase="https://download.alipay.com/aliedit/aliedit/2401/aliedit.cab#Version=1,1,0,0">
+                        <param value="0613110323" name="cm5ts">
+                        <param value="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDDS92pDVyWNT7dzG9zH0opH44z9FayCZTX5iqGUxUjPi667IkyaqrsmDPqKsJp47lJ29lzs+Qv8zjPPdmnxjFteMrfpc4ui24gL1iZnchwX87Ox/+Xrm8HFmKlhmUO9n/QgTT+Nz1RGMEN1+HijvsoAhS0TS8XjSfzRkrwvK2pJQIDAQAB" name="cm5pk">
+                        <param value="4" name="CryptoMode">
+                        <embed type="application/aliedit"  id="Password_Edit_NoIE"  width="190" height="26" pluginspage="https://securitycenter.alipay.com/sc/aliedit/intro.htm">
+                    </object>
+                </span>
+              </div>  
+              <div class="field">
+                <span>
+                    验证码  <input />
+                </span>
+               </div>  
+               <script>
+                KISSY.util.AccessibleFlash("#Password_Edit_IE");
+             </script>
+            </div>
+            
+
+    <a class="s-view-code" href="#">显示源码</a><!--点击该链接自动帮你显示s=demo里的内容，如不需要，去除链接即可-->
+</div>
+
+<h3 class="s-title">API</h3>
+<div class="s-section">
+    <h4 class="s-api-title">方法</h4>
+    <div class="s-api-method">KISSY.util.AccessibleFlash ( el,tabIndex=0 )</div>
+    <h4 class="s-api-title">参数</h4>
+    <div class="s-api-params">
+        <ul class="s-list">
+            <li>{String | HtmlElement} el 代表 flash 所在 Object 的选择器或者单个HtmlElement对象</li>
+            </li>
+            <li>{Number} tabIndex flash input 的 tabindex，默认 0</li>
+            </li>
+        </ul>
+    </div>    
+</div>
+
+</div>
+<div id="footer">
+    &copy; Copyright 2010~2011, KISSY Team.
+</div>
+</body>
+</html>
