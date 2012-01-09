@@ -4,13 +4,18 @@
  * https://developer.mozilla.org/En/Using_audio_and_video_in_Firefox
  * https://developer.mozilla.org/En/Media_formats_supported_by_the_audio_and_video_elements
  * http://kathymarks.com/archives/2005/09/embedding_windows_media_and_quicktime_video_on_a_web_page.html
+ *
+ * chrome multiple request issue
+ * http://www.google.com/support/forum/p/Chrome/thread?tid=024fadbf7f76fb30&hl=en
+ *
  * @author yiminghe@gmail.com
  */
-(function() {
+(function () {
 
-    function isWin(){
-        return navigator.userAgent.indexOf("Windows")!=-1;
+    function isWin() {
+        return navigator.userAgent.indexOf("Windows") != -1;
     }
+
     var S = KISSY,
         doc = document,
         DOM = S.DOM,
@@ -21,9 +26,9 @@
             '<audio preload="auto" autoplay="autoplay"></audio>' :
             // ie
             // can only be put under body ??
-            (S.UA.ie?'<bgsound></bgsound>':
-            // old firefox , use windows media player in windows and quicktime player in others
-            '<embed '+(isWin()?'type="application/x-mplayer2"':'')+' autostart="true" hidden="true"></embed>');
+            (S.UA.ie ? '<bgsound></bgsound>' :
+                // old firefox , use windows media player in windows and quicktime player in others
+                '<embed ' + (isWin() ? 'type="application/x-mplayer2"' : '') + ' autostart="true" hidden="true"></embed>');
 
     // ie6 need this ??
     function refreshPlayer() {
@@ -45,7 +50,8 @@
         return player;
     }
 
-    S.CheckCodePlayer = function(url) {
+    S.namespace("Util");
+    S.Util.CheckCodePlayer = function (url) {
         getPlayer().src = url;
     };
 
