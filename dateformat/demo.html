@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>KISSY util - DateFormat</title>
+<link rel="shortcut icon" href="../../kissy-dpl/base/assets/favicon.ico"/>
+<link rel="stylesheet" href="../../kissy-dpl/base/assets/reset.css"/>
+<link rel="stylesheet" href="../../kissy-dpl/base/assets/kissy-docs.css"/>
+<script src="http://a.tbcdn.cn/s/kissy/1.2.0/kissy.js"></script>
+<script src="../../kissy-dpl/base/assets/kissy-docs.js"></script>
+<script src="dateformat.js"></script>
+</head>
+<body>
+<div id="header">
+    <h1 class="logo"><a alt="KISSY" href="http://kissyui.com/"><img src="../../kissy-dpl/base/assets/logo.png"/></a></h1>
+    <div class="sub-title">Util</div>
+    <ul class="navigation">
+        <li><a href="http://blog.kissyui.com/">博客</a></li>
+        <li><a href="http://github.com/kissyteam">源码</a></li>
+    </ul>
+
+</div>
+<div id="content">
+    <div class="s-crumbs">
+        <span>当前位置：</span>
+        <a href="http://kissyui.com/">KISSY</a>
+        <a href="../index.html">Util</a>
+        <span>DateFormat</span>
+    </div>
+        <pre class="s-section">
+作者：张挺(zhangting@taobao.com)
+功能：将Date对象转成响应的日期格式的字符串
+描述：支持大多数浏览器
+源码：<a href="dateformat.js">DateFormat.js</a></pre>
+
+    <h3 class="s-title">使用实例</h3>
+    <div class="s-section">
+        <div class="s-demo">
+            <ul>
+                <li>DateFormat.format(date) 【<span id="answer1"></span>】</li>
+                <li>DateFormat.format(date, "yyyy-MM-dd") 【<span id="answer2"></span>】</li>
+                <li>DateFormat.format(date, DateFormat.DATE_FMT_3) 【<span id="answer3"></span>】</li>
+                <li>DateFormat.format(date, "dd/MM/yyyy") 【<span id="answer4"></span>】</li>
+            </ul>
+
+            <h3 style="margin-top: 20px;">内置的格式化串：</h3>
+            <table border="1" width="500">
+                <tr align="center">
+                    <td>DateFormat.TIME_PATTERN</td><td>"yyyy-MM-dd HH:mm:ss"</td>
+                </tr>
+                <tr align="center">
+                    <td>DateFormat.TIME_PATTERN_SHORT</td><td>"dd/MM/yy HH:mm:ss"</td>
+                </tr>
+                <tr align="center">
+                    <td>DateFormat.TIME_PATTERN_SHORT_1</td><td>"yyyy/MM/dd HH:mm"</td>
+                </tr>
+                <tr align="center">
+                    <td>DateFormat.TIME_PATTERN_SESSION</td><td>"yyyyMMddHHmmss"</td>
+                </tr>
+                <tr align="center">
+                    <td>DateFormat.DATE_FMT_0</td><td>"yyyyMMdd"</td>
+                </tr>
+                <tr align="center">
+                    <td>DateFormat.DATE_FMT_1</td><td>"yyyy/MM/dd"</td>
+                </tr>
+                <tr align="center">
+                    <td>DateFormat.DATE_FMT_2</td><td>"yyyy/MM/dd hh:mm:ss"</td>
+                </tr>
+                <tr align="center">
+                    <td>DateFormat.DATE_FMT_3</td><td>"yyyy-MM-dd"</td>
+                </tr>
+            </table>
+
+        <script>
+            KISSY.use('util/dateformat', function(S,DateFormat) {
+                var curDate = new Date();
+                S.one('#answer1').text(DateFormat.format(curDate));
+                S.one('#answer2').text(DateFormat.format(curDate, "yyyy-MM-dd"));
+                S.one('#answer3').text(DateFormat.format(curDate, DateFormat.DATE_FMT_3));
+                S.one('#answer4').text(DateFormat.format(curDate, "dd/MM/yyyy"));
+            });
+        </script>
+    </div>
+    <a class="s-view-code" href="#">显示源码</a><!--点击该链接自动帮你显示s=demo里的内容，如不需要，去除链接即可-->
+</div>
+
+<h3 class="s-title">API</h3>
+<div class="s-section">
+    <h4 class="s-api-title">方法</h4>
+    <div class="s-api-method">KISSY.util.DateFormat.format( date[, formatString, cfg])</div>
+    <h4 class="s-api-title">参数</h4>
+    <div class="s-api-params">
+        <ul class="s-list">
+            <li><strong>date:</strong> {Date} 需要格式化的Date对象</li>
+            <li><strong>formatString:</strong> {String} 格式化成的字符串格式 默认为"DateFormat.DATE_FMT_3"，也就是"yyyy-MM-dd"</li>
+            <li>
+                <strong>cfg:</strong> {Object} 可选 <br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;lang: {String} ["CN"|"EN"] 语言类型 中文或者英文
+            </li>
+        </ul>
+    </div>
+    <h4 class="s-api-title">返回</h4>
+    <div class="s-api-return">{String} 格式化后的字符串</div>
+</div>
+
+</div>
+<div id="footer">
+    &copy; Copyright 2010~2012, KISSY Team.
+</div>
+</body>
+</html>
