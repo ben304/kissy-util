@@ -7,3 +7,5 @@
 *.bak
 .DS_Store
 Thumb.db
+/*.iws
+/*.ipr
