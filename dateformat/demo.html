@@ -29,18 +29,24 @@
     </div>
         <pre class="s-section">
 作者：张挺(zhangting@taobao.com)
-功能：将Date对象转成响应的日期格式的字符串
+功能：将Date对象转成相应的日期格式的字符串
 描述：支持大多数浏览器
 源码：<a href="dateformat.js">DateFormat.js</a></pre>
 
     <h3 class="s-title">使用实例</h3>
     <div class="s-section">
+        <style type="text/css">
+            #demo li {
+                height: 28px;
+                line-height: 28px;
+            }
+            
+            #demo li span {
+                color: #ff6600;
+            }
+        </style>
         <div class="s-demo">
-            <ul>
-                <li>DateFormat.format(date) 【<span id="answer1"></span>】</li>
-                <li>DateFormat.format(date, "yyyy-MM-dd") 【<span id="answer2"></span>】</li>
-                <li>DateFormat.format(date, DateFormat.DATE_FMT_3) 【<span id="answer3"></span>】</li>
-                <li>DateFormat.format(date, "dd/MM/yyyy") 【<span id="answer4"></span>】</li>
+            <ul id="demo">
             </ul>
 
             <h3 style="margin-top: 20px;">内置的格式化串：</h3>
@@ -74,10 +80,27 @@
         <script>
             KISSY.use('util/dateformat', function(S,DateFormat) {
                 var curDate = new Date();
-                S.one('#answer1').text(DateFormat.format(curDate));
-                S.one('#answer2').text(DateFormat.format(curDate, "yyyy-MM-dd"));
-                S.one('#answer3').text(DateFormat.format(curDate, DateFormat.DATE_FMT_3));
-                S.one('#answer4').text(DateFormat.format(curDate, "dd/MM/yyyy"));
+                var tpl = '<li>{s} 【<span>{v}</span>】</li>';
+                var $ = S.all;
+
+                var testString = [
+                    "DateFormat.format(curDate)",
+                    "DateFormat.format(curDate, 'yyyy-MM-dd')",
+                    "DateFormat.format(curDate, DateFormat.DATE_FMT_3)",
+                    "DateFormat.format(curDate, 'dd/MM/yyyy')",
+                    "DateFormat.format(curDate, '月份前面不想有0，M月')",
+                    "DateFormat.format(curDate, '日期前面不想有0，d日')",
+                    "DateFormat.format(curDate, 'yyyy年MM月dd日 HH点mm分ss秒 S毫秒哇咔咔')",
+                    "DateFormat.format(curDate, '12小时制现在h点，24小时制是H点')",
+                    "DateFormat.format(curDate, '英文表示 M / MM', {lang:'EN'})",
+                    "DateFormat.format(curDate, '今天是一周的第\"E\"天，是\"EE\"，三个字是\"EEE\"')",
+                    "DateFormat.format(curDate, '英文表示 E / EE', {lang:'EN'})"
+                ];
+
+                for (var obj in testString) {
+                    //循环执行结果，输出到html
+                    $(S.substitute(tpl, {s:testString[obj], v: eval(testString[obj])})).appendTo($('#demo'));
+                }
             });
         </script>
     </div>
@@ -95,7 +118,7 @@
             <li><strong>formatString:</strong> {String} 格式化成的字符串格式 默认为"DateFormat.DATE_FMT_3"，也就是"yyyy-MM-dd"</li>
             <li>
                 <strong>cfg:</strong> {Object} 可选 <br/>
-                &nbsp;&nbsp;&nbsp;&nbsp;lang: {String} ["CN"|"EN"] 语言类型 中文或者英文
+                &nbsp;&nbsp;&nbsp;&nbsp;lang: {String} ["CN"|"EN"] Default:['CN']语言类型 中文或者英文
             </li>
         </ul>
     </div>

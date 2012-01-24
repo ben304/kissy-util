@@ -1,7 +1,7 @@
 ﻿/**
  * @fileoverview 格式化日期字符串
  * @author zhangting <zhangting@taobao.com>
- *
+ * @version 0.1
  */
 KISSY.add('util/dateformat', function(S) {
 
@@ -25,20 +25,39 @@ KISSY.add('util/dateformat', function(S) {
         format:function(date, formatString, cfg) {
             if(date instanceof Date) {
                 return formatHandle.decorate(date, formatString, cfg);
+            } else {
+                //TODO string to date
+                S.log('date parameter is not an instance of Date', 'info');
             }
         }
     }, DATE_PATTERN);
+
+    var WEEK = {};
+
+    WEEK[LANG.CN] = [
+        '日','一','二','三','四','五','六'
+    ];
+
+    WEEK[LANG.EN] = [
+        ['Sun','Mon','Tue','Wed','Thur','Fri','Sat'],
+        ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+    ];
+
+    var MONTH = [
+        ['Jan.','Feb.','Mar.','Apr.','May.','June.','July.','Aug.','Sept.','Oct.','Nov.','Dec.'],
+        ['January','February','March','April','May','June','July','August','September','October','November','December']
+    ];
 
     var formatHandle = function() {
 
         return {
             decorate: function(date, formatString, cfg) {
                 var la = cfg && LANG[cfg.lang] ? LANG[cfg.lang] : LANG.CN;
-                if(!formatString) {
+                if(!formatString && formatString!= '') {
                     formatString = DATE_PATTERN.DATE_FMT_3;
                 }
-                /*
-                var d = {
+
+                var o = {
                     "M+" : date.getMonth()+1, //月份
                     "d+" : date.getDate(), //日
                     "h+" : date.getHours()%12 == 0 ? 12 : date.getHours()%12, //小时
@@ -46,44 +65,37 @@ KISSY.add('util/dateformat', function(S) {
                     "m+" : date.getMinutes(), //分
                     "s+" : date.getSeconds(), //秒
                     "q+" : Math.floor((date.getMonth()+3)/3), //季度
-                    "S" : date.getMilliseconds() //毫秒
+                    "S+" : date.getMilliseconds() //毫秒
                 };
 
-                if(/(y+)/.test(formatString)){
+                while(/(y+)/.test(formatString)){
                     formatString=formatString.replace(RegExp.$1, (date.getFullYear()+"").substr(4 - RegExp.$1.length));
                 }
 
-                if(/(E+)/.test(formatString)){
-                    formatString=formatString.replace(RegExp.$1, ((RegExp.$1.length>1) ? (RegExp.$1.length>2 ? "\u661f\u671f" : "\u5468") : "")+week[date.getDay()+""]);
+                while(/(M+)/.test(formatString)){
+                    var mon = date.getMonth()+1;
+                    if(la === LANG.EN) {
+                        formatString = formatString.replace(RegExp.$1, (RegExp.$1.length>1) ? MONTH[1][mon] : MONTH[0][mon]);
+                    } else {
+                        formatString = formatString.replace(RegExp.$1, (RegExp.$1.length==1) ? (mon) : (("00"+ mon).substr((""+ mon).length)));
+                    }
                 }
-                for(var k in d){
-                    if(new RegExp("("+ k +")").test(fmt)){
+
+                for(var k in o){
+                    while(new RegExp("("+ k +")").test(formatString)){
                         formatString = formatString.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
                     }
                 }
 
-                */
-
-                var o = {};
-
-                o[formatString.match(/y+/)] = date.getFullYear();
-                o[formatString.match(/M+/)] = date.getMonth()+1;
-                o[formatString.match(/d+/)] = date.getDate();
-
-
-                var yearKey = formatString.match(/y+/);
-                if(yearKey) {
-                    formatString = formatString.replace(/(y+)/, "{$1}");
+                while(/(E+)/.test(formatString)){
+                    if(la === LANG.EN) {
+                        formatString=formatString.replace(RegExp.$1, (RegExp.$1.length>1 ? WEEK[la][1][date.getDay()+""] : WEEK[la][0][date.getDay()+""]));
+                    } else {
+                        formatString=formatString.replace(RegExp.$1, ((RegExp.$1.length>1) ? (RegExp.$1.length>2 ? "\u661f\u671f" : "\u5468") : "")+WEEK[la][date.getDay()+""]);
+                    }
                 }
 
-                formatString = formatString.replace(/(M+)/, "{$1}");
-                formatString = formatString.replace(/(d+)/, "{$1}");
-                formatString = formatString.replace(/(H+)/, "{$1}");
-                formatString = formatString.replace(/(m+)/, "{$1}");
-                formatString = formatString.replace(/(s+)/, "{$1}");
-
-                return S.substitute(formatString, o);
-
+                return formatString;
             }
         }
     }();
