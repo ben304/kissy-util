@@ -14,3 +14,7 @@ Thumbs.db
 .svn/
 *.swp
 out/
+Thumb.db
+/*.iws
+/*.ipr
+/node_modules/
