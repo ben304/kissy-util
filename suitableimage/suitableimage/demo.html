@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>KISSY util - suitableimage</title>
+	<link rel="shortcut icon" href="http://docs.kissyui.com/kissy-dpl/base/assets/favicon.ico"/> 
+	<link rel="stylesheet" href="http://docs.kissyui.com/kissy-dpl/base/assets/reset.css"/> 
+	<link rel="stylesheet" href="http://docs.kissyui.com/kissy-dpl/base/assets/kissy-docs.css"/> 	
+	<script src="http://a.tbcdn.cn/s/kissy/1.3.0/kissy.js"></script>
+	<script src="http://docs.kissyui.com/kissy-dpl/base/assets/kissy-docs.js"></script> 
+	<script src="suitableimage.js"></script> 
+</head>
+<body>
+    <div id="header"> 
+		<h1 class="logo"><a alt="KISSY" href="http://kissyui.com/"><img src="http://docs.kissyui.com/kissy-dpl/base/assets/logo.png"/></a></h1> 
+		<div class="sub-title">Util</div>
+		<ul class="navigation"> 
+			<li><a href="http://blog.kissyui.com/">博客</a></li> 
+			<li><a href="http://github.com/kissyteam">源码</a></li> 		
+		</ul>
+		
+	</div> 
+    <div id="content">
+		<div class="s-crumbs">
+			<span>当前位置：</span>
+			<a href="http://kissyui.com/">KISSY</a>
+			<a href="../index.html">Util</a>
+			<span>suitableImage</span>
+		</div>
+			<pre class="s-section">				
+作者：xiaogu.gxb@taobao.com (筱谷)
+功能：兼容不支持 backgroundSize 的 background-size: cover|contain 简单实现
+描述：
+源码：<a href="suitableimage.js">suitableimage.js</a></pre>
+			
+			<h3 class="s-title">Demo - 功能点</h3>
+			<div class="s-section">
+				<div class="s-demo">
+					<div>
+            <div class="ss-image-lazyload-cover" style="width: 400px; height: 300px; border: 3px solid blue">
+              <img src="http://img.la/80x160" />
+            </div>
+            <button id="J_Cover">background-size: cover</button>
+            <p>&nbsp;</p>
+            <div class="ss-image-lazyload-contain" style="width: 400px; height: 300px; border: 3px solid blue"></div>
+            <button id="J_Contain">background-size: contain</button>
+					</div>
+					<script>
+						KISSY.ready(function(S){
+							KISSY.use("util/suitableimage", function(S, SuitableImage){
+               KISSY.all("#J_Cover").on("click", function(){
+                 var coverPic = new SuitableImage(".ss-image-lazyload-cover")
+               })
+                KISSY.all("#J_Contain").on("click", function(){
+                  var containPic = new SuitableImage({
+                    wrapperEl: ".ss-image-lazyload-contain",
+                    contain: true,
+                    image: "http://img.la/80x160",
+                    loadingPic: "http://img03.taobaocdn.com/tps/i3/T1b1m3XkVpXXXXXXXX-32-32.gif"
+                  })
+                })
+
+              })
+						})						
+					</script>
+				</div>
+				<a class="s-view-code" href="#">显示源码</a><!--点击该链接自动帮你显示s=demo里的内容，如不需要，去除链接即可-->
+			</div>
+			
+			<h3 class="s-title">API</h3>			
+			<div class="s-section">
+				<h4 class="s-api-title">方法</h4>
+				<div class="s-api-method">KISSY.util.suitableImage ( param )</div>
+        <h4 class="s-api-title">描述</h4>
+        <div class="s-api-method">生成一个自适应图片</div>
+				<h4 class="s-api-title">参数</h4>
+				<div class="s-api-params">
+					<ul class="s-list">
+						<li>{Object} [ <em>param</em> = {} ] 默认配置：
+            <pre>
+Config = {
+    wrapperEl: '#J_SSImage',                //必选，外层元素
+    image: 'http://img.la/green/800x600',   //可选，图片地址，优先读取 data-ks-simage 或 data-image 或里面第一个 img 元素
+    lazyload: true,            //可选，注意 false 的情况下不支持 backgroundSize 的浏览器 cover 和 contain 设置可能失效
+    width: null,                            //可选，指定适应宽度
+    height: null,                           //可选，指定适应高度
+    cover: true,                            //可选，是否设置为 background-size: cover
+    contain: false,                         //可选，是否设置为 background-size: contain ，优先级比 cover 高
+    position: "center"                      //可选，图片定位，如"center"、"left top"
+    relative: false            //可选，一般会用 absolute 定位，但如果有冲突，可以使用 relative，但注意内部元素影响
+    autoResize: true,          //可选，是否为不支持 background-size 的浏览器触发 resize 事件，自动调整适应大小
+    showDura: 0.5,                          //可选，lazyload 后图片渐显出来时的动画时间
+    showFunc: "easeBoth",                   //可选，lazyload 后图片渐显出来时的动画曲线函数
+    loadingPic: null                        //可选，图片加载时的菊花，不建议在这里设置
+  };
+            </pre>
+            </li>
+					</ul>
+				</div>
+				<h4 class="s-api-title">返回</h4>
+				<div class="s-api-return">SuitableImage 实例</div>
+			</div>
+
+      <h3 class="s-title">API</h3>
+      <div class="s-section">
+        <h4 class="s-api-title">方法</h4>
+        <div class="s-api-method">.resize(width, height)</div>
+        <h4 class="s-api-title">描述</h4>
+        <div class="s-api-method">为不支持 backgroundSize 的浏览器额外提供的 resize 方法</div>
+        <h4 class="s-api-title">参数</h4>
+        <div class="s-api-params">
+          <ul class="s-list">
+            <li>{Number} [ <em>width</em> = 123 ] 指定适应的宽度</li>
+            <li>{Number} [ <em>height</em> = 123 ] 指定适应的高度</li>
+          </ul>
+        </div>
+        <h4 class="s-api-title">返回</h4>
+        <div class="s-api-return">SuitableImage 实例</div>
+      </div>
+
+			<h3 class="s-title">Note</h3>			
+			<div class="s-section">
+				<ul class="s-list">
+					<li>因为在不支持 backgroundSize 的浏览器中是用 position: absolute 定位，所以应该在 wrapper 上设置 position: relative ，除非使用 config.relative </li>
+				</ul>
+			</div>
+    </div>
+    <div id="footer">
+        &copy; Copyright 2010~2013, KISSY Team.
+    </div>
+</body>
+</html>
