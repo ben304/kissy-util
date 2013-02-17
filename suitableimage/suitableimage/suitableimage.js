@@ -98,7 +98,7 @@ KISSY.add("util/suitableimage", function(S, DOM, Node) {
           "width": "100%",
           "height": "100%",
           "opacity": 0,
-          "position": "relative"
+          "position": "absolute"
         });
       } else {
         inner = this._sizeForLoser(pic, width, height);
