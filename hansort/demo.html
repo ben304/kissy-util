@@ -1,0 +1,100 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>KISSY util - hanSort</title>
+  <link rel="shortcut icon" href="http://docs.kissyui.com/kissy-dpl/base/assets/favicon.ico"/>
+  <link rel="stylesheet" href="http://docs.kissyui.com/kissy-dpl/base/assets/reset.css"/>
+  <link rel="stylesheet" href="http://docs.kissyui.com/kissy-dpl/base/assets/kissy-docs.css"/>
+  <script src="http://a.tbcdn.cn/s/kissy/1.3.0/kissy.js"></script>
+  <script src="http://docs.kissyui.com/kissy-dpl/base/assets/kissy-docs.js"></script>
+  <script src="hansort.js"></script>
+</head>
+<body>
+    <div id="header"> 
+		<h1 class="logo"><a alt="KISSY" href="http://kissyui.com/"></a></h1>
+		<div class="sub-title">Util</div>
+		<ul class="navigation"> 
+			<li><a href="http://blog.kissyui.com/">博客</a></li> 
+			<li><a href="http://github.com/kissyteam">源码</a></li> 		
+		</ul>
+		
+	</div> 
+    <div id="content">
+		<div class="s-crumbs">
+			<span>当前位置：</span>
+			<a href="http://kissyui.com/">KISSY</a>
+			<a href="../index.html">Util</a>
+			<span>hanSort</span>
+		</div>
+			<pre class="s-section">				
+作者：xiaogu.gxb@taobao.com (筱谷)
+功能：汉字拼音排序工具
+描述：提供 数组/列表 按拼音或 Unicode 编码排序。在不支持默认拼音排序的操作系统里会自动加载一个 50k+(压缩后) ~ 80k+ 的汉字列表
+源码：<a href="hansort.js">hansort.js</a></pre>
+			
+			<h3 class="s-title">Demo - 功能点</h3>			
+			<div class="s-section">
+				<div class="s-demo">
+					<div>
+            <ol id="J_HanSort">
+              <li>淘宝</li>
+              <li>UED</li>
+              <li>你</li>
+              <li>看不见</li>
+              <li>我吗？</li>
+              <li>是的</li>
+              <li>1.3.0 KISSY</li>
+              <li>Ha看见了</li>
+            </ol>
+            <ol id="J_HanSort2"></ol>
+            <p><button id="J_PinYin">拼音排序</button></p>
+					</div>
+          <script type="text/javascript">
+            KISSY.use('util/hansort', function(S, hanSort){
+              S.one('#J_PinYin').on("click", function(){
+                var newArr = hanSort(S.one("#J_HanSort"));
+                S.one("#J_HanSort").empty().append(newArr);
+              })
+            })
+          </script>
+				</div>
+				<a class="s-view-code" href="#">显示源码</a><!--点击该链接自动帮你显示s=demo里的内容，如不需要，去除链接即可-->
+			</div>
+			
+			<h3 class="s-title">API</h3>			
+			<div class="s-section">
+				<h4 class="s-api-title">方法</h4>
+				<div class="s-api-method">KISSY.util.hanSort (array, config)</div>
+				<h4 class="s-api-title">参数</h4>
+				<div class="s-api-params">
+					<ul class="s-list">
+						<li>{Array} [ <em>array</em> = [] ] 需要排序的数组、NodeList、HTMLOListElement、HTMLUListElement、HTMLSelectElement，或者其选择器(String)</li>
+            <li>{Object} [ <em>config</em> = {}] 默认配置：
+            <pre>
+defaultCfg = {
+    orderBy: "Pinyin",      // 0或"System"，系统默认排序；1或"Unicode"，笔画排序；2或"Pinyin"，拼音排序
+    sort: 0                 // 0或"AES"，是升序；1或"DESC"，是降序
+},
+            </pre>
+            </li>
+					</ul>
+				</div>
+				<h4 class="s-api-title">返回</h4>
+				<div class="s-api-return">排序后的数组</div>
+			</div>
+			
+			<h3 class="s-title">Note</h3>			
+			<div class="s-section">
+				<ul class="s-list">
+					<li>null</li>
+				</ul>
+			</div>
+    </div>
+    <div id="footer">
+        &copy; Copyright 2010~2013, KISSY Team.
+    </div>
+
+</body>
+</html>
