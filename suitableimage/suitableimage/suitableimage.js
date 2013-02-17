@@ -12,7 +12,7 @@ KISSY.add("util/suitableimage", function(S) {
     cover: true,
     contain: false,
     lazyload: true,
-    position: null,
+    position: "center",
     relative: false,
     showDura: 0.5,
     showFunc: "easeBoth",
@@ -92,9 +92,6 @@ KISSY.add("util/suitableimage", function(S) {
       }
       inner = null;
       if (document.body.style.backgroundSize != null) {
-        if (!this.config.relative) {
-          this.config.wrapperEl.css("position", "relative");
-        }
         inner = DOM.create("<span class='suitable-image-div' style='display: block'></span>");
         $(inner).css({
           "background": "url(" + pic.src + ") " + (this.config.position ? this.config.position : "center" + " no-repeat"),
@@ -102,9 +99,7 @@ KISSY.add("util/suitableimage", function(S) {
           "width": "100%",
           "height": "100%",
           "opacity": 0,
-          "position": this.config.relative ? "relative" : "absolute",
-          "top": 0,
-          "left": 0
+          "position": "relative"
         });
       } else {
         inner = this._sizeForLoser(pic, width, height);
@@ -113,7 +108,7 @@ KISSY.add("util/suitableimage", function(S) {
     };
 
     SuitableImage.prototype._sizeForLoser = function(pic, width, height) {
-      var picHeight, picWidth, s_height, s_left, s_top, s_width, scale, _ref;
+      var isBottom, isCenterH, isCenterV, isRight, left, picHeight, picWidth, s_height, s_left, s_top, s_width, scale, top, _ref;
       if (!pic.width || !pic.height) {
         return;
       }
@@ -128,12 +123,22 @@ KISSY.add("util/suitableimage", function(S) {
         s_width = height / picHeight * picWidth;
         s_left = (s_width - width) / 2;
       }
+      isCenterH = this.config.position.indexOf("center") === 0;
+      isCenterV = this.config.position.indexOf("center") >= 3 || (isCenterH && this.config.position.length === 6);
+      isBottom = this.config.position.indexOf("bottom") >= 0;
+      isRight = this.config.position.indexOf("right") >= 0;
+      top = s_top && !this.config.contain ? -s_top : (isCenterH ? (height - s_height) / 2 : isBottom ? height - s_height : 0);
+      left = s_left && !this.config.contain ? -s_left : (isCenterV ? (width - s_width) / 2 : isRight ? width - s_width : 0);
+      if (!this.config.relative) {
+        this.config.wrapperEl.css("position", "relative");
+      }
+      this.config.wrapperEl.css("overflow", "hidden");
       $(pic).css({
-        top: s_top && !this.config.contain ? -s_top : 0,
-        left: s_left && !this.config.contain ? -s_left : 0,
+        top: top,
+        left: left,
         width: s_width,
         height: s_height,
-        position: 'absolute',
+        position: this.config.relative ? "relative" : "absolute",
         opacity: 0,
         display: 'block',
         zoom: 1
