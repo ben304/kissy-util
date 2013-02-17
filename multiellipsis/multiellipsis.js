@@ -34,14 +34,14 @@
     interval    : 5       # 间隔，一般越大速度越快，但精度降低，优先读取 data-ks-interval
     endHTML     : "..."   # 省略字符，注意此处如有浮动相对定位等样式可能影响高度判断，优先读取 data-ks-endhtml
     exact       : false   # 当 interval 过大的可强制精确度，一般可设为 false，优先读取 data-ks-exact
-    child       : ""      # 选择器字符串：鉴于 text() 的特殊性，这里允许设置为 text node 的上一层元素，优先读取 data-ks-child
+    child       : ""      # 子元素选择器字符串：鉴于 text() 的特殊性，上面允许设置为 text node 的上一层元素，然后这里裁剪子元素；优先读取 data-ks-child
     keepLine    : false   # 是否保留换行，优先读取 data-ks-keepline
     setTitle    : false   # 是否将 title 属性设置为原文本，优先读取 data-ks-settitle
 */
 
-KISSY.add("util/multiellipsis", function(S) {
+KISSY.add("util/multiellipsis", function(S, Node) {
   var $, Config, multiEllipsis, _ellipsis;
-  $ = S.all;
+  $ = Node.all;
   if (!window.getComputedStyle) {
     window.getComputedStyle = function(el, pseudo) {
       this.el = el;
@@ -144,4 +144,6 @@ KISSY.add("util/multiellipsis", function(S) {
   };
   S.namespace("Util");
   return S.Util.multiellipsis = multiEllipsis;
+}, {
+  requires: ['node']
 });
