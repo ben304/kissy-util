@@ -107,7 +107,7 @@ Config =
   interval    : 5       # 可选，每次裁剪间隔，一般越大速度越快，但精度降低，优先读取 data-ks-interval
   endHTML     : "..."   # 可选，省略字符，注意此处如有浮动相对定位等样式可能影响高度判断，优先读取 data-ks-endhtml
   exact       : false   # 可选，当 interval 过大的可强制精确度，一般可设为 false，优先读取 data-ks-exact
-  child       : ""      # 可选，选择器字符串：鉴于 text() 的特殊性，这里允许设置为父元素，优先读取 data-ks-child
+  child       : ""      # 可选，子元素选择器字符串（将裁剪此元素内容）：鉴于 text() 的特殊性，外层元素则设置为父元素，优先读取 data-ks-child
   keepLine    : false   # 可选，是否保留换行，优先读取 data-ks-keepline
   setTitle    : false   # 可选，是否将 title 属性设置为原文本，优先读取 data-ks-settitle
 </pre></li>
