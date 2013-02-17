@@ -93,7 +93,7 @@ KISSY.add("util/suitableimage", function(S, DOM, Node) {
       if (document.body.style.backgroundSize != null) {
         inner = DOM.create("<span class='suitable-image-div' style='display: block'></span>");
         $(inner).css({
-          "background": "url(" + pic.src + ") " + (this.config.position ? this.config.position : "center" + " no-repeat"),
+          "background": "url(" + pic.src + ") " + (this.config.position ? this.config.position : "center") + " no-repeat",
           "background-size": this.config.contain ? "contain" : "cover",
           "width": "100%",
           "height": "100%",
